@@ -35,17 +35,17 @@ git merge Branch
 ***Em caso de duvidas criar um pull request, obrigado :^)***
 
 #Inspiraçoes front end
-https://alxama.com/
-https://www.butchersalmancil.pt/
-https://www.pizzeriabeddia.com/
-https://www.wearefoundingfarmers.com/
-https://www.unionsquaredonuts.com/ (mapa e horarios)
-https://www.bennettssandwichshop.com/
-https://midarestaurant.com/ (fotos)
-https://www.theogdenver.com/menus/
-https://www.marlowesf.com/ (menu)
-https://www.sweetcheeksq.com/scqgrid/menu
-https://www.costavida.com/
-https://www.aquariusseafood.com.au/
-https://theuppercrustpizzeria.com/
-https://www.federalistpig.com/
+- https://alxama.com/
+- https://www.butchersalmancil.pt/
+- https://www.pizzeriabeddia.com/
+- https://www.wearefoundingfarmers.com/
+- https://www.unionsquaredonuts.com/ (mapa e horarios)
+- https://www.bennettssandwichshop.com/
+- https://midarestaurant.com/ (fotos)
+- https://www.theogdenver.com/menus/
+- https://www.marlowesf.com/ (menu)
+- https://www.sweetcheeksq.com/scqgrid/menu
+- https://www.costavida.com/
+- https://www.aquariusseafood.com.au/
+- https://theuppercrustpizzeria.com/
+- https://www.federalistpig.com/
