@@ -17,6 +17,7 @@ import {
 import Image from 'next/image';
 import ReservationsCalendar from './reservationsCalendar';
 import ReservationsTimeSelector from './reservationsTimeSelector';
+import ReservationsPersonsNumberSelector from './reservationsPersonsNumberSelector';
 
 export default function ReservationsLayout() {
 	return (
@@ -50,24 +51,7 @@ export default function ReservationsLayout() {
 									<ReservationsTimeSelector />
 								</div>
 								<div>
-									<Label htmlFor="party" className="block mb-1">
-										Persons
-									</Label>
-									<Select id="party">
-										<SelectTrigger className="w-full h-10">
-											<SelectValue placeholder="Persons" />
-										</SelectTrigger>
-										<SelectContent>
-											<SelectItem value="1">1 person</SelectItem>
-											<SelectItem value="2">2 people</SelectItem>
-											<SelectItem value="3">3 people</SelectItem>
-											<SelectItem value="4">4 people</SelectItem>
-											<SelectItem value="5">5 people</SelectItem>
-											<SelectItem value="6">6 people</SelectItem>
-											<SelectItem value="7">7 people</SelectItem>
-											<SelectItem value="8">8 people</SelectItem>
-										</SelectContent>
-									</Select>
+									<ReservationsPersonsNumberSelector />
 								</div>
 								<Button type="submit" size="lg">
 									Reserve Table
