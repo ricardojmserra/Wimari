@@ -14,12 +14,32 @@ import {
 	SelectContent,
 	SelectItem,
 } from '@/components/ui/select';
+import * as Yup from 'yup';
 import Image from 'next/image';
 import ReservationsCalendar from './reservationsCalendar';
 import ReservationsTimeSelector from './reservationsTimeSelector';
 import ReservationsPersonsNumberSelector from './reservationsPersonsNumberSelector';
+import { Formik, Form, Field } from 'formik';
+
+const validationSchema = Yup.object({
+	date: Yup.date().required('Date is required'),
+	time: Yup.string().required('Time is required'),
+	persons: Yup.number()
+		.required('Number of persons is required')
+		.min(1, 'Must be at least 1 person'),
+});
+
+const initialValues = {
+	date: new Date(),
+	time: '',
+	persons: 1,
+};
 
 export default function ReservationsLayout() {
+	const handleSubmit = () => {
+		console.log('submit');
+	};
+
 	return (
 		<section className="flex flex-col min-h-screen">
 			<div className="container mx-auto px-4 md:px-6 lg:px-8 py-12 md:py-16 lg:py-20">
@@ -43,20 +63,28 @@ export default function ReservationsLayout() {
 							</div>
 						</div>
 						<div className="p-8 md:p-12 lg:p-16">
-							<form className="mx-auto max-w-96 grid gap-4">
-								<div>
-									<ReservationsCalendar />
-								</div>
-								<div>
-									<ReservationsTimeSelector />
-								</div>
-								<div>
-									<ReservationsPersonsNumberSelector />
-								</div>
-								<Button type="submit" size="lg">
-									Reserve Table
-								</Button>
-							</form>
+							<Formik
+								initialValues={initialValues}
+								validationSchema={validationSchema}
+								onSubmit={handleSubmit}
+							>
+								{({ errors, touched }) => (
+									<Form className="mx-auto max-w-96 grid gap-4">
+										<div>
+											<ReservationsCalendar name="date" />
+										</div>
+										<div>
+											<ReservationsTimeSelector />
+										</div>
+										<div>
+											<ReservationsPersonsNumberSelector />
+										</div>
+										<Button type="submit" size="lg">
+											Reserve Table
+										</Button>
+									</Form>
+								)}
+							</Formik>
 						</div>
 					</div>
 				</div>
