@@ -22,11 +22,12 @@ import {
 	reservationInfoValidationSchema,
 } from './validationSchemas';
 import ReservationInfoForm from './reservationInfoForm';
+import postReservation from '@/requests/reservations/postReservation';
 
 const initialValues: Reservation = {
 	date: new Date(),
 	time: '',
-	persons: '1',
+	persons: '',
 	name: '',
 	lastName: '',
 	phone: '',
@@ -85,18 +86,27 @@ export default function ReservationsLayout() {
 		return errors;
 	};
 
-	const handleSubmit = (e: any, v: any) => {
+	const handleSubmit = (values: any, form: any) => {
 		switch (state) {
 			case RESERVATION_INFO_STATE:
 				setState(PERSONAL_INFO_STATE);
-				v.setSubmitting(false);
+				form.setSubmitting(false);
 				break;
 			case PERSONAL_INFO_STATE:
-				setState(CONFIRMATION_STATE);
+				postReservation(values, { retry: 10 })
+					.then(() => {
+						setState(CONFIRMATION_STATE);
+						form.setSubmitting(false);
+					})
+					.catch((error: any) => {
+						// if there's a reason for the error show the reason
+						// else show some error
+						console.log('error', error);
+					});
 				break;
 		}
 
-		console.log('submit', e);
+		console.log('submit', values);
 	};
 
 	return (

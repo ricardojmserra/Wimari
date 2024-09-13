@@ -1,9 +1,11 @@
 import { Calendar } from '@/components/ui/calendar';
 import ErrorMessage from '@/components/ui/errorMessage';
+import getUnavailableDates from '@/requests/reservations/getUnavailableDates';
 import { useField } from 'formik';
 import { useEffect, useState } from 'react';
 import { DayClickEventHandler } from 'react-day-picker';
-// import { parse } from 'date-fns';
+import { parse } from 'date-fns';
+import getHolidaysDate from '@/requests/management/getHolidaysDate';
 
 interface Props {
 	name: string;
@@ -16,6 +18,7 @@ export default function ReservationsCalendar({ name }: Props) {
 
 	const [unavailableDates, setUnavailableDates] = useState<Date[]>();
 	const [holidayDates, setHolidayDates] = useState<Date[]>();
+	const [currentMonth, setCurrentMonth] = useState<number>(new Date().getMonth());
 
 	const handleSelect: DayClickEventHandler = (day: Date) => {
 		if (day) {
@@ -23,12 +26,30 @@ export default function ReservationsCalendar({ name }: Props) {
 		}
 	};
 
+	const handleMonthChange = (month: Date) => {
+		setCurrentMonth(month.getMonth());
+	};
+
 	useEffect(() => {
-		// getUnavailableDates(month).then((resp: any) => {
-		// setUnavailableDates(
-		// 	resp.data.map((date: string) => parse(date, 'dd/MM/yyyy', new Date()))
-		// );
-		// });
+		getUnavailableDates(currentMonth)
+			.then((resp: any) => {
+				setUnavailableDates(
+					resp.data.map((date: string) => parse(date, 'dd/MM/yyyy', new Date()))
+				);
+			})
+			.catch((error) => {
+				console.log('error', error);
+			});
+
+		getHolidaysDate(currentMonth)
+			.then((resp: any) => {
+				setHolidayDates(
+					resp.data.map((date: string) => parse(date, 'dd/MM/yyyy', new Date()))
+				);
+			})
+			.catch((error) => {
+				console.log('error', error);
+			});
 	}, []);
 
 	return (
@@ -37,6 +58,7 @@ export default function ReservationsCalendar({ name }: Props) {
 				selected={field.value}
 				toDate={oneMonthLater}
 				onDayClick={handleSelect}
+				onMonthChange={handleMonthChange}
 				disabled={[...(unavailableDates || []), ...(holidayDates || [])]}
 			/>
 
