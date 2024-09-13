@@ -109,8 +109,7 @@ export default function ReservationsLayout() {
 								src="/img/paella.webp"
 								alt="Paella background"
 								layout="fill"
-								objectFit="cover"
-								className="absolute inset-0"
+								className="absolute inset-0 object-cover"
 							/>
 							<div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center p-8 md:p-12 lg:p-16">
 								<h2 className="text-2xl font-bold md:text-3xl lg:text-4xl text-white">
