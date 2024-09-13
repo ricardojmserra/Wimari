@@ -14,7 +14,7 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
 		<DayPicker
 			fromDate={new Date()}
 			showOutsideDays={showOutsideDays}
-			className={cn('p-3', className)}
+			className={cn('', className)}
 			classNames={{
 				caption_start: 'w-full',
 				months: 'flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0 w-full', // Ensure months container is full width

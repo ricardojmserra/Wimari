@@ -6,48 +6,107 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import {
-	Select,
-	SelectTrigger,
-	SelectValue,
-	SelectContent,
-	SelectItem,
-} from '@/components/ui/select';
 import * as Yup from 'yup';
 import Image from 'next/image';
 import ReservationsCalendar from './reservationsCalendar';
 import ReservationsTimeSelector from './reservationsTimeSelector';
 import ReservationsPersonsNumberSelector from './reservationsPersonsNumberSelector';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useState } from 'react';
+import ReservationFormState from '@/types/reservationFormState';
+import ReservationConfirmation from './reservationConfirmation';
+import ReservationsPersonalInfoForm from './reservationsPersonalInfoForm';
+import {
+	personalInfoValidationSchema,
+	reservationInfoValidationSchema,
+} from './validationSchemas';
+import ReservationInfoForm from './reservationInfoForm';
 
-const validationSchema = Yup.object({
-	date: Yup.date().required('Date is required'),
-	time: Yup.string().required('Time is required'),
-	persons: Yup.number()
-		.required('Number of persons is required')
-		.min(1, 'Must be at least 1 person'),
-});
-
-const initialValues = {
+const initialValues: Reservation = {
 	date: new Date(),
 	time: '',
-	persons: 1,
+	persons: '1',
+	name: '',
+	lastName: '',
+	phone: '',
+	obs: '',
+};
+
+const variants = {
+	initial: { x: '100%', opacity: 0 },
+	animate: { x: 0, opacity: 1 },
+	exit: { x: '-70%', opacity: 0 },
+};
+
+const RESERVATION_INFO_STATE = 'Reservation Info';
+const PERSONAL_INFO_STATE = 'Personal Info';
+const CONFIRMATION_STATE = 'Confirmation';
+
+const getSubmitButtonText = (state: ReservationFormState, isSubmitting: boolean) => {
+	if (isSubmitting) {
+		return 'Reserving table...';
+	}
+
+	switch (state) {
+		case RESERVATION_INFO_STATE:
+			return 'Continue';
+		case PERSONAL_INFO_STATE:
+			return 'Reserve Table';
+	}
+};
+
+const getValidationSchema = (state: ReservationFormState) => {
+	switch (state) {
+		case RESERVATION_INFO_STATE:
+			return reservationInfoValidationSchema;
+		case PERSONAL_INFO_STATE:
+			return personalInfoValidationSchema;
+		default:
+			return reservationInfoValidationSchema;
+	}
 };
 
 export default function ReservationsLayout() {
-	const handleSubmit = () => {
-		console.log('submit');
+	const [state, setState] = useState<ReservationFormState>(RESERVATION_INFO_STATE);
+
+	const formValidation = (values: any) => {
+		let errors: any = {};
+
+		getValidationSchema(state)
+			.validate(values, { abortEarly: false })
+			.catch((err) => {
+				// Collect errors from both schemas
+				err.inner.forEach((error: any) => {
+					errors[error.path] = error.message;
+				});
+			});
+
+		return errors;
+	};
+
+	const handleSubmit = (e: any, v: any) => {
+		switch (state) {
+			case RESERVATION_INFO_STATE:
+				setState(PERSONAL_INFO_STATE);
+				v.setSubmitting(false);
+				break;
+			case PERSONAL_INFO_STATE:
+				setState(CONFIRMATION_STATE);
+				break;
+		}
+
+		console.log('submit', e);
 	};
 
 	return (
-		<section className="flex flex-col min-h-screen">
+		<section id="reservations" className="flex flex-col min-h-screen">
 			<div className="container mx-auto px-4 md:px-6 lg:px-8 py-12 md:py-16 lg:py-20">
-				<div className="bg-card rounded-lg shadow-lg overflow-hidden">
+				<div className="bg-card rounded-lg shadow-md overflow-hidden">
 					<div className="grid md:grid-cols-2">
 						<div className="relative h-[650px] overflow-hidden">
 							<Image
-								src="/img/paella.jpeg"
+								src="/img/paella.webp"
 								alt="Paella background"
 								layout="fill"
 								objectFit="cover"
@@ -65,23 +124,50 @@ export default function ReservationsLayout() {
 						<div className="p-8 md:p-12 lg:p-16">
 							<Formik
 								initialValues={initialValues}
-								validationSchema={validationSchema}
+								validationSchema={reservationInfoValidationSchema}
 								onSubmit={handleSubmit}
+								validate={formValidation}
 							>
-								{({ errors, touched }) => (
+								{(formikProps) => (
 									<Form className="mx-auto max-w-96 grid gap-4">
-										<div>
-											<ReservationsCalendar name="date" />
-										</div>
-										<div>
-											<ReservationsTimeSelector />
-										</div>
-										<div>
-											<ReservationsPersonsNumberSelector />
-										</div>
-										<Button type="submit" size="lg">
-											Reserve Table
-										</Button>
+										<AnimatePresence mode="wait">
+											<motion.div
+												className="grid gap-4"
+												key={state}
+												initial="initial"
+												animate="animate"
+												exit="exit"
+												variants={variants}
+												transition={{ duration: 0.3 }}
+											>
+												{state === RESERVATION_INFO_STATE && (
+													<ReservationInfoForm />
+												)}
+												{state === PERSONAL_INFO_STATE && (
+													<ReservationsPersonalInfoForm
+														formikProps={formikProps}
+													/>
+												)}
+												{state === CONFIRMATION_STATE && (
+													<ReservationConfirmation
+														reservation={formikProps.values}
+													/>
+												)}
+
+												{state !== CONFIRMATION_STATE && (
+													<Button
+														type="submit"
+														size="lg"
+														disabled={formikProps.isSubmitting}
+													>
+														{getSubmitButtonText(
+															state,
+															formikProps.isSubmitting
+														)}
+													</Button>
+												)}
+											</motion.div>
+										</AnimatePresence>
 									</Form>
 								)}
 							</Formik>

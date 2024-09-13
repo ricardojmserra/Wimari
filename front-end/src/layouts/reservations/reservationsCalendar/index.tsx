@@ -1,4 +1,5 @@
 import { Calendar } from '@/components/ui/calendar';
+import ErrorMessage from '@/components/ui/errorMessage';
 import { useField } from 'formik';
 import { useEffect, useState } from 'react';
 import { DayClickEventHandler } from 'react-day-picker';
@@ -7,6 +8,8 @@ import { DayClickEventHandler } from 'react-day-picker';
 interface Props {
 	name: string;
 }
+
+const oneMonthLater = new Date(new Date().setMonth(new Date().getMonth() + 1));
 
 export default function ReservationsCalendar({ name }: Props) {
 	const [field, meta, helpers] = useField(name);
@@ -29,16 +32,15 @@ export default function ReservationsCalendar({ name }: Props) {
 	}, []);
 
 	return (
-		<>
+		<div>
 			<Calendar
 				selected={field.value}
+				toDate={oneMonthLater}
 				onDayClick={handleSelect}
 				disabled={[...(unavailableDates || []), ...(holidayDates || [])]}
 			/>
 
-			{meta.touched && meta.error ? (
-				<div className="text-red-600">{meta.error}</div>
-			) : null}
-		</>
+			{meta.touched && meta.error ? <ErrorMessage>{meta.error}</ErrorMessage> : null}
+		</div>
 	);
 }

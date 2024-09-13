@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import Navbar from '@/layouts/navbar';
 import Footer from '@/layouts/footer';
 import { Inter } from 'next/font/google';
 import { cn } from '@/lib/utils';
+import Navbar from '@/layouts/navbar';
 
 const fontHeading = Inter({
 	subsets: ['latin'],
