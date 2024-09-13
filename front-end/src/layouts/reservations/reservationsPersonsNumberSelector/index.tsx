@@ -10,6 +10,7 @@ import {
 import getPersonsBoundaries from '@/requests/management/getPersonsBoundaries';
 import { useField } from 'formik';
 import { useEffect, useState } from 'react';
+import { CircularProgress } from '@mui/material';
 
 interface Props {
 	name: string;
@@ -58,6 +59,7 @@ export default function ReservationsPersonsNumberSelector({ name }: Props) {
 
 					{!minPersons && (
 						<SelectItem disabled value={`loading`}>
+							<CircularProgress size={15} className="mr-2" />
 							Loading...
 						</SelectItem>
 					)}

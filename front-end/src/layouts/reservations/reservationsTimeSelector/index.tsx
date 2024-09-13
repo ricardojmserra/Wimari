@@ -8,6 +8,7 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 import getUnavailableDates from '@/requests/reservations/getUnavailableDates';
+import { CircularProgress } from '@mui/material';
 import { useField } from 'formik';
 import { useEffect, useState } from 'react';
 
@@ -98,6 +99,7 @@ export default function ReservationsTimeSelector({ name }: Props) {
 
 					{!availableTimes && (
 						<SelectItem disabled value={`loading`}>
+							<CircularProgress size={15} className="mr-2" />
 							Loading...
 						</SelectItem>
 					)}

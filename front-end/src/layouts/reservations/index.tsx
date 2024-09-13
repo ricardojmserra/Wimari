@@ -6,11 +6,7 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import { Button } from '@/components/ui/button';
-import * as Yup from 'yup';
 import Image from 'next/image';
-import ReservationsCalendar from './reservationsCalendar';
-import ReservationsTimeSelector from './reservationsTimeSelector';
-import ReservationsPersonsNumberSelector from './reservationsPersonsNumberSelector';
 import { Formik, Form } from 'formik';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
