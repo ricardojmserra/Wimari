@@ -68,7 +68,7 @@ export default function ReviewsCarrousel({ reviews }: Props) {
 			}}
 		>
 			{[...reviews, ...reviews, ...reviews].map((review, index) => (
-				<ReviewItem key={index} {...review} />
+				<ReviewItem key={index} review={review} />
 			))}
 		</motion.div>
 	);
