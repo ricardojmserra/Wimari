@@ -7,7 +7,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import getUnavailableDates from '@/requests/reservations/getUnavailableDates';
+import getUnavailableTimes from '@/requests/reservations/getUnavailableTimes';
 import { CircularProgress } from '@mui/material';
 import { useField } from 'formik';
 import { useEffect, useState } from 'react';
@@ -68,7 +68,7 @@ export default function ReservationsTimeSelector({ name }: Props) {
 
 	useEffect(() => {
 		const date = dateField.value;
-		getUnavailableDates(date)
+		getUnavailableTimes(date)
 			.then((resp) => {
 				setAvailableTimes(
 					generateTimes(date, resp.data.startTime, resp.data.endDate).filter(
