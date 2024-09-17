@@ -1,10 +1,9 @@
 import http from '../http';
 
-export default function postReservation(data: object, ctx?: any, fetchOptions?: object) {
+export default function postReservation(data: object, fetchOptions?: object) {
 	try {
 		return http.post(`/marisco-ms/reservations/`, data, {
 			...fetchOptions,
-			ctx,
 			cache: 'no-store',
 		});
 	} catch (error: any) {
