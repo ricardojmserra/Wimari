@@ -1,13 +1,9 @@
 import React from 'react';
 import { Avatar, Card, CardContent } from '@mui/material';
 import { FaStar, FaQuoteLeft } from 'react-icons/fa';
+import Review from '@/types/review';
 
-interface Props {
-	name: string;
-	review: string;
-	rating: number; // Rating out of 5
-	source: string; // Source of the review (e.g., Google, TrustPilot)
-}
+interface Props extends Review {}
 
 export default function ReviewItem({ name, review, rating, source }: Props) {
 	return (
