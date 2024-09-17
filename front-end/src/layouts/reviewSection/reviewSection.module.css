@@ -1,0 +1,36 @@
+.logos:before,
+.logos:after {
+	position: absolute;
+	top: 0;
+	width: 150px;
+	height: 100%;
+	content: '';
+	z-index: 2;
+	filter: blur(5px);
+}
+
+.logos:before {
+	left: 0;
+	background: linear-gradient(to left, rgba(255, 255, 255, 0), hsl(var(--primary)));
+	margin-left: -10px;
+}
+
+.logos:after {
+	right: 0;
+	background: linear-gradient(to right, rgba(255, 255, 255, 0), #7e22ce);
+	margin-right: -10px;
+}
+
+@media screen and (max-width: 630px) {
+	.logos:before,
+	.logos:after {
+		width: 90px;
+	}
+}
+
+@media screen and (max-width: 430px) {
+	.logos:before,
+	.logos:after {
+		width: 60px;
+	}
+}
