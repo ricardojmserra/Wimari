@@ -52,7 +52,7 @@ export default function ReviewItem({ review }: Props) {
 				<div className="mt-3 sm:mt-4 flex justify-between items-center pt-2 border-t border-gray-200">
 					<span className="text-xs text-gray-400 flex gap-1 items-center">
 						{`From: `}
-						<span className="font-medium italic">
+						<span className="font-bold italic">
 							{review ? (
 								<>{source}</>
 							) : (
