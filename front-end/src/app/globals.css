@@ -30,3 +30,22 @@
 html {
 	scroll-behavior: smooth;
 }
+
+p,
+span,
+li,
+div,
+button,
+input {
+	font-family: var(--font-body);
+}
+
+h1,
+h2 {
+	font-family: var(--font-title);
+}
+
+section {
+	max-width: 2200px;
+	margin: 0 auto;
+}

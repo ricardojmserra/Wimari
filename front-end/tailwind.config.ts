@@ -10,6 +10,7 @@ const config: Config = {
 	theme: {
 		extend: {
 			fontFamily: {
+				title: ['var(--font-title)', ...fontFamily.sans],
 				heading: ['var(--font-heading)', ...fontFamily.sans],
 				body: ['var(--font-body)', ...fontFamily.sans],
 			},
@@ -25,6 +26,7 @@ const config: Config = {
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))',
+					hover: 'hsl(var(--primary))',
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -56,6 +58,19 @@ const config: Config = {
 				lg: `var(--radius)`,
 				md: `calc(var(--radius) - 2px)`,
 				sm: `calc(var(--radius) - 4px)`,
+			},
+			animation: {
+				'fade-in': 'fadeIn 0.5s ease-out',
+			},
+			keyframes: {
+				fadeIn: {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' },
+				},
+			},
+			scale: {
+				'95': '0.95',
+				'105': '1.05',
 			},
 		},
 	},
