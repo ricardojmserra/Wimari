@@ -1,20 +1,37 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Footer from '@/layouts/footer';
-import { Inter } from 'next/font/google';
+import { Open_Sans, Raleway } from 'next/font/google';
+// import { Lato, Playfair_Display } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import Navbar from '@/layouts/navbar';
 
-const fontHeading = Inter({
+// const fontTitle = Playfair_Display({
+// 	subsets: ['latin'],
+// 	display: 'swap',
+// 	variable: '--font-title',
+// 	weight: ['400', '500', '700'],
+// });
+
+// const fontBody = Lato({
+// 	subsets: ['latin'],
+// 	display: 'swap',
+// 	variable: '--font-body',
+// 	weight: ['300', '400', '700'],
+// });
+
+const fontTitle = Raleway({
 	subsets: ['latin'],
 	display: 'swap',
-	variable: '--font-heading',
+	variable: '--font-title',
+	weight: ['400', '500', '700'],
 });
 
-const fontBody = Inter({
+const fontBody = Open_Sans({
 	subsets: ['latin'],
 	display: 'swap',
 	variable: '--font-body',
+	weight: ['300', '400', '700'],
 });
 
 export const metadata: Metadata = {
@@ -29,7 +46,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={cn('antialiased', fontHeading.variable, fontBody.variable)}>
+			<body className={cn('antialiased', fontBody.variable, fontTitle.variable)}>
 				<Navbar />
 				{children}
 				<Footer />
