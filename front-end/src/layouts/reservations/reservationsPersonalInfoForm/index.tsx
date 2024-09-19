@@ -1,4 +1,3 @@
-import { Input } from '@/components/ui/input';
 import InputWithText from '@/components/ui/inputWithText';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -9,7 +8,7 @@ interface Props {
 }
 
 export default function ReservationsPersonalInfoForm({ formikProps }: Props) {
-	const { values, handleChange, handleBlur, errors, touched } = formikProps;
+	const { values, handleChange, errors, touched } = formikProps;
 
 	return (
 		<>

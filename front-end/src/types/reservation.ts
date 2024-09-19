@@ -1,4 +1,4 @@
-interface Reservation {
+export interface Reservation {
 	date: Date;
 	time: string;
 	persons: string;

@@ -1,12 +1,12 @@
 import RequestResponse from '@/types/requestResponse';
 import updateRefreshToken from './refreshToken';
-import { getDefaultRequestHeaders } from './defaultHeaders';
+// import { getDefaultRequestHeaders } from './defaultHeaders';
 import { GET, RequestMethod } from '@/types/requestMethod';
 
 const TRY_DELAY = 10000;
 
 const BASE_URL = process.env.BACKEND_URL;
-const NEXT_AUTH_SECRET = process.env.NEXTAUTH_SECRET;
+// const NEXT_AUTH_SECRET = process.env.NEXTAUTH_SECRET;
 export const SESSION_TOKEN_NAME = 'next-auth.session-token';
 
 // async function retrieveSession(fetchOptions: any) {
@@ -42,7 +42,7 @@ async function retryRequest(
 	fetchOptions: any,
 	refresh: boolean
 ) {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		setTimeout(async () => {
 			request(
 				fetchUrl,
@@ -89,7 +89,7 @@ export async function request(
 	// const session = await retrieveSession(fetchOptions);
 	// const accessToken = session?.accessToken;
 
-	let options = {
+	const options = {
 		...fetchOptions,
 		method: method,
 		// headers: getDefaultRequestHeaders(fetchOptions, accessToken),

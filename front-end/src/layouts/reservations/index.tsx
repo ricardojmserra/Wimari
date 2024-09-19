@@ -19,6 +19,7 @@ import {
 } from './validationSchemas';
 import ReservationInfoForm from './reservationInfoForm';
 import postReservation from '@/requests/reservations/postReservation';
+import { Reservation } from '@/types/reservation';
 
 const initialValues: Reservation = {
 	date: new Date(),
@@ -68,7 +69,7 @@ export default function ReservationsLayout() {
 	const [state, setState] = useState<ReservationFormState>(RESERVATION_INFO_STATE);
 
 	const formValidation = (values: any) => {
-		let errors: any = {};
+		const errors: any = {};
 
 		getValidationSchema(state)
 			.validate(values, { abortEarly: false })

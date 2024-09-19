@@ -1,7 +1,7 @@
 import { GET, PUT } from '@/types/requestMethod';
 
 const REFRESH_URL = '/login-ms/refresh-token/';
-const NEXT_AUTH_SECRET = process.env.NEXTAUTH_SECRET;
+// const NEXT_AUTH_SECRET = process.env.NEXTAUTH_SECRET;
 
 const updateRefreshToken = async (
 	isServer: boolean,

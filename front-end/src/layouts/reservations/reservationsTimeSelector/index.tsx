@@ -42,7 +42,7 @@ function generateTimes(date: Date, startTime: string, endTime: string): string[]
 	setCorrectDate(startDate, date.getFullYear(), date.getMonth(), date.getDate());
 	setCorrectDate(endDate, date.getFullYear(), date.getMonth(), date.getDate());
 
-	let current = new Date(startDate);
+	const current = new Date(startDate);
 
 	while (current <= endDate) {
 		const timeString = current.toTimeString().slice(0, 5); // Format "HH:MM"
