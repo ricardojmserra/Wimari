@@ -8,7 +8,7 @@ const DynamicGoogleMaps = dynamic(() => import('@/components/googleMaps'), {
 
 export default function LocationSection() {
 	return (
-		<section className="flex flex-col md:flex-row min-h-screen h-screen">
+		<section id="location" className="flex flex-col md:flex-row min-h-[95vh] h-[95vh]">
 			<div className="w-full md:w-1/2 lg:w-3/5 h-full min-h-[350px] animate-fade-in">
 				<DynamicGoogleMaps
 					className="w-full h-full animate-fade-in"
