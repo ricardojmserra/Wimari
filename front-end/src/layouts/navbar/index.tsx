@@ -1,66 +1,123 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/1PCzHPkGN1h
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+'use client';
 
-export default function Navbar() {
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Menu } from 'lucide-react';
+import Link from 'next/link';
+
+const navItems = [
+	{
+		label: 'HOME',
+		href: '/',
+	},
+	{
+		label: 'MENU',
+		href: '/menu/',
+	},
+	{
+		label: 'LOCATION',
+		href: '/#location',
+	},
+	{
+		label: 'ABOUT',
+		href: '/#about',
+	},
+];
+
+const MotionLink = motion(Link);
+
+export default function Component() {
+	const [isOpen, setIsOpen] = useState(false);
+
 	return (
-		<header className="sticky top-0 z-50 w-full bg-background">
-			<div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-				<nav className="flex items-center space-x-4 md:space-x-6">
-					<Link
-						href="/"
-						className="text-lg font-medium text-primary font-[Permanent Marker], cursive relative before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px] before:bg-primary before:transition-all before:duration-300 hover:before:w-full"
-						prefetch={false}
-					>
-						Home
+		<nav className="bg-white shadow-lg">
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div className="flex justify-between items-center h-20">
+					<Link href={'/#reservation'}>
+						<motion.button
+							whileHover={{ scale: 1.05 }}
+							whileTap={{ scale: 0.95 }}
+							className="max-sm:hidden bg-primary text-white px-8 py-3 text-sm font-medium transition-colors duration-300 ease-in-out"
+						>
+							RESERVE
+						</motion.button>
 					</Link>
-					<Link
-						href="/menu/"
-						className="text-muted-foreground hover:text-foreground font-[Permanent Marker], cursive relative before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px] before:bg-foreground before:transition-all before:duration-300 hover:before:w-full"
-						prefetch={false}
-					>
-						Menu
+					<Link href={'/'}>
+						<h1 className="text-3xl font-light tracking-wider text-gray-800">
+							O Marisco
+						</h1>
 					</Link>
-					<Link
-						href="/about/"
-						className="text-muted-foreground hover:text-foreground font-[Permanent Marker], cursive relative before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px] before:bg-foreground before:transition-all before:duration-300 hover:before:w-full"
-						prefetch={false}
-					>
-						About
-					</Link>
-				</nav>
-				<div className="font-sans text-2xl font-bold font-[Permanent Marker], cursive">
-					<Link href="#" className="text-primary" prefetch={false}>
-						Acme Bistro
+					<Link href={'/order/'}>
+						<motion.button
+							whileHover={{ scale: 1.05 }}
+							whileTap={{ scale: 0.95 }}
+							className="max-sm:hidden bg-primary text-white px-8 py-3 text-sm font-medium transition-colors duration-300 ease-in-out"
+						>
+							ORDER
+						</motion.button>
 					</Link>
 				</div>
-				<nav className="flex items-center space-x-4 md:space-x-6">
-					<Link
-						href="#reservations"
-						className="text-muted-foreground hover:text-foreground font-[Permanent Marker], cursive relative before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px] before:bg-foreground before:transition-all before:duration-300 hover:before:w-full"
-						prefetch={false}
-					>
-						Reservations
-					</Link>
-					<Link
-						href="#contact"
-						className="text-muted-foreground hover:text-foreground font-[Permanent Marker], cursive relative before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px] before:bg-foreground before:transition-all before:duration-300 hover:before:w-full"
-						prefetch={false}
-					>
-						Contact
-					</Link>
-					<Button
-						size="sm"
-						className="hidden md:inline-flex font-[Permanent Marker], cursive relative before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px] before:bg-primary-foreground before:transition-all before:duration-300 hover:before:w-full"
-					>
-						Order Online
-					</Button>
-				</nav>
 			</div>
-		</header>
+			<div className="border-t border-gray-200">
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div className="hidden sm:flex justify-between items-center h-16">
+						{navItems.map((item, index) => (
+							<MotionLink
+								key={index}
+								href={item.href}
+								className="text-gray-600 hover:text-black transition-colors duration-300 ease-in-out text-sm font-medium"
+								whileHover={{ y: -2 }}
+								whileTap={{ y: 0 }}
+							>
+								{item.label}
+							</MotionLink>
+						))}
+					</div>
+					<div className="sm:hidden flex justify-end h-16 items-center">
+						<motion.button
+							whileHover={{ scale: 1.1 }}
+							whileTap={{ scale: 0.9 }}
+							onClick={() => setIsOpen(!isOpen)}
+							className="text-gray-600 hover:text-black focus:outline-none"
+						>
+							<Menu className="h-6 w-6" />
+						</motion.button>
+					</div>
+				</div>
+			</div>
+			{isOpen && (
+				<motion.div
+					initial={{ opacity: 0, y: -20 }}
+					animate={{ opacity: 1, y: 0 }}
+					exit={{ opacity: 0, y: -20 }}
+					className="md:hidden bg-white border-t border-gray-200"
+				>
+					<div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+						{navItems.map((item, index) => (
+							<Link
+								key={index}
+								href={item.href}
+								className="text-gray-600 hover:text-black hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ease-in-out"
+							>
+								{item.label}
+							</Link>
+						))}
+
+						<Link
+							href={'/#reservation'}
+							className="text-white bg-primary hover:text-black hover:bg-gray-50 block px-3 py-2 text-base font-medium transition-colors duration-300 ease-in-out"
+						>
+							Reserve
+						</Link>
+						<Link
+							href={'/order/'}
+							className="text-white bg-primary hover:text-black hover:bg-gray-50 block px-3 py-2 text-base font-medium transition-colors duration-300 ease-in-out"
+						>
+							Order
+						</Link>
+					</div>
+				</motion.div>
+			)}
+		</nav>
 	);
 }

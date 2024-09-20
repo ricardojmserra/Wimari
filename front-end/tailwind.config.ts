@@ -29,7 +29,7 @@ const config: Config = {
 					hover: 'hsl(var(--primary))',
 				},
 				secondary: {
-					DEFAULT: 'hsl(var(--secondary))',
+					DEFAULT: '#2dd4bf',
 					foreground: 'hsl(var(--secondary-foreground))',
 				},
 				destructive: {
