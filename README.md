@@ -15,6 +15,7 @@
 3. SpringBoot
 4. Nodejs
 5. BlobStorage(?)
+6. Java (17)
 
 # Como trabalhar no git
 
