@@ -13,9 +13,11 @@ const config: Config = {
 				title: ['var(--font-title)', ...fontFamily.sans],
 				heading: ['var(--font-heading)', ...fontFamily.sans],
 				body: ['var(--font-body)', ...fontFamily.sans],
+				navbarTitle: ['var(--font-navbar-title)', ...fontFamily.sans],
 			},
 			screens: {
 				xs: '440px',
+				'navbar-sm': '530px',
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -27,6 +29,7 @@ const config: Config = {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))',
 					hover: 'hsl(var(--primary))',
+					'100': 'hsl(var(--primary) / 0.1)',
 				},
 				secondary: {
 					DEFAULT: '#2dd4bf',
@@ -60,7 +63,7 @@ const config: Config = {
 				sm: `calc(var(--radius) - 4px)`,
 			},
 			animation: {
-				'fade-in': 'fadeIn 0.5s ease-out',
+				'fade-in': 'fadeIn 0.7s ease-out',
 			},
 			keyframes: {
 				fadeIn: {
