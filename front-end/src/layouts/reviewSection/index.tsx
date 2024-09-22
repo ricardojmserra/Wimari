@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import styles from './reviewSection.module.css';
 import ReviewsCarrousel from './reviewsCarrousel';
+import SectionTitle from '@/components/sectionTitle';
 
 // based on: https://www.youtube.com/watch?v=Ot4nZ6UjJLE&list=LL&index=1&t=982s
 
@@ -35,7 +36,7 @@ export default function ReviewSection() {
 	}, []);
 
 	return (
-		<section className="bg-gradient-to-r h-[425px] from-primary to-purple-700">
+		<section className="bg-gradient-to-r m-h-[425px] from-primary to-purple-700">
 			<motion.div
 				viewport={{ once: true, margin: '-200px' }}
 				initial={{ opacity: 0 }}
@@ -44,9 +45,12 @@ export default function ReviewSection() {
 				onViewportEnter={() => setEnteredInViewport(true)}
 				className="relative overflow-hidden w-full h-full py-10 flex flex-col items-center justify-center"
 			>
-				<h2 className="text-xl font-bold xs:text-2xl md:text-3xl lg:text-4xl text-white px-6 text-center">
+				<SectionTitle className="text-white text-center px-6">
 					What Our Customers Say
-				</h2>
+				</SectionTitle>
+				{/* <h2 className="text-xl font-bold xs:text-2xl md:text-3xl lg:text-4xl text-white px-6 ">
+					What Our Customers Say
+				</h2> */}
 				<div className={`${styles.logos} h-80 flex items-center w-full`}>
 					<ReviewsCarrousel reviews={reviews} />
 				</div>

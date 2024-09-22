@@ -116,13 +116,13 @@ export default function Footer() {
 					<div className="flex space-x-4 text-sm">
 						<Link
 							href="/privacy-policy"
-							className="transition-colors cursive relative before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px] before:bg-white before:transition-all before:duration-300 hover:before:w-full transition-colors inline-block"
+							className="cursive relative before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px] before:bg-white before:transition-all before:duration-300 hover:before:w-full transition-colors inline-block"
 						>
 							Privacy Policy
 						</Link>
 						<Link
 							href="/terms-of-service"
-							className="transition-colors cursive relative before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px] before:bg-white before:transition-all before:duration-300 hover:before:w-full transition-colors inline-block"
+							className="cursive relative before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px] before:bg-white before:transition-all before:duration-300 hover:before:w-full transition-colors inline-block"
 						>
 							Terms of Service
 						</Link>
