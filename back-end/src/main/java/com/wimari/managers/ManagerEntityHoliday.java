@@ -1,5 +1,6 @@
 package com.wimari.managers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -17,6 +18,21 @@ public class ManagerEntityHoliday {
     @PersistenceContext
     private EntityManager entityManager;
 
+    // Método para criar um novo feriado com a data fornecida (dia, mês e ano)
+    @Transactional
+    public EntityHoliday createHoliday(int day, int month, int year) {
+        // Criar uma data com o dia, mês e ano fornecidos
+        LocalDate holidayDate = LocalDate.of(year, month, day);
+
+        // Criar e salvar o feriado
+        EntityHoliday holiday = new EntityHoliday();
+        holiday.setHolidayDate(holidayDate);
+        entityManager.persist(holiday);
+
+        return holiday;
+    }
+
+    // Método para buscar feriados por mês
     @Transactional(readOnly = true)
     public List<EntityHoliday> findHolidaysByMonth(int month) {
         String jpql = "SELECT h FROM EntityHoliday h WHERE FUNCTION('MONTH', h.holidayDate) = :month";
